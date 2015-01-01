@@ -6,7 +6,8 @@ ENV HOME /root
 # Use baseimage-docker's init process.
 CMD ["/sbin/my_init"]
 
-ADD demoApp.conf /etc/nginx/sites-enabled/demoApp.conf
+#ADD demoApp.conf /etc/nginx/sites-enabled/demoApp.conf
+ADD default /etc/nginx/sites-enabled/default
 RUN rm -f /etc/service/nginx/down && cd /home/app && git clone https://github.com/vChrisR/demoApp.git
 RUN chown app /home/app/demoApp
 
