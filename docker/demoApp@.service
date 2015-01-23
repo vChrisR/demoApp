@@ -1,0 +1,16 @@
+[Unit]
+Description=demoApp
+After=docker.service
+Requires=docker.service
+
+[Service]
+TimeoutStartSec=0
+ExecStartPre=-/usr/bin/docker kill demoApp
+ExecStartPre=-/usr/bin/docker rm demoApp
+ExecStartPre=/usr/bin/docker pull vchrisr/demoapp
+EnvironmentFile=/etc/environment
+ExecStart=/usr/bin/docker run -P --name demoApp -e DEBUG=demoApp -t vchrisr/demoapp
+ExecStop=/usr/bin/docker stop demoApp
+
+[X-Fleet]
+Conflicts=demoApp@*.service
