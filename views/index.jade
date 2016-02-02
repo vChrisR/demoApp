@@ -2,8 +2,12 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title} on container: #{server}
-  h1 Hello AppManagEvent
-  p 
-     | Thanks for watching! Please checkout our blog: 
-     a(href="http://www.automate-it.today") automate-it.today
+  p.
+   Welcome to #{title}<br />
+   Let's generate some load: 
+  button(class="btn", id="loadGenButton").
+   Generate Load! 
+  #results
+
+  script(src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+  script(src="/javascripts/main.js")
