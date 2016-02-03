@@ -1,3 +1,5 @@
+var maxSessions = 10;
+
 var express = require('express');
 var router = express.Router();
 var os = require('os');
@@ -19,7 +21,7 @@ function blockCpuFor(ms) {
 
 router.get('/', function(req, res) {
 	var responseText = "Max concurrent jobs reached on " + os.hostname();
-	if (runningInstances < 11) {
+	if (runningInstances < maxSessions) {
 		var blockInterval = setInterval(function() { blockCpuFor(250) }, 1000);
 		runningInstances++;
 		setTimeout(function() { clearInterval(blockInterval); runningInstances--; }, 30000);
@@ -27,6 +29,15 @@ router.get('/', function(req, res) {
 	}
 
 	res.send(responseText);
+});
+
+router.get('/health', function(req, res) {
+	var responseText = "Max concurrent jobs reached on " + os.hostname();
+        if (runningInstances < maxSessions) {
+                responseText = 'Requests active on ' + os.hostname() + ': ' + runningInstances;
+        }
+
+        res.send(responseText);
 });
 
 module.exports = router;
