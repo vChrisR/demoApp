@@ -1,4 +1,4 @@
-var maxSessions = 10;
+var maxSessions = 20;
 
 var express = require('express');
 var router = express.Router();
@@ -24,7 +24,7 @@ router.get('/', function(req, res) {
 	if (runningInstances < maxSessions) {
 		var blockInterval = setInterval(function() { blockCpuFor(250) }, 1000);
 		runningInstances++;
-		setTimeout(function() { clearInterval(blockInterval); runningInstances--; }, 30000);
+		setTimeout(function() { clearInterval(blockInterval); runningInstances--; }, 60000);
 	  	responseText = 'Requests active on ' + os.hostname() + ': ' + runningInstances;
 	}
 
