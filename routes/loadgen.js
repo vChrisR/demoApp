@@ -1,4 +1,4 @@
-var maxSessions = 20;
+var maxSessions = 16;
 
 var express = require('express');
 var router = express.Router();
